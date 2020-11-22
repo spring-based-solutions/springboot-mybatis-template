@@ -1,0 +1,25 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.template.mapper.StudentMapper">
+    <resultMap id="StudentResult" type="com.example.template.entity.Student">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="birthday" column="birthday"/>
+    </resultMap>
+    <select id="selectAll" resultMap="StudentResult">
+        select * from student
+    </select>
+    <select id="selectById" parameterType="Long" resultMap="StudentResult">
+        select * from student where id = #{id}
+    </select>
+    <insert id="insert" parameterType="com.example.template.entity.Student">
+        insert into student(name,sex,birthday) values (#{name},#{sex},#{birthday})
+    </insert>
+    <update id="update" parameterType="com.example.template.entity.Student">
+        update student set name = #{name},sex=#{sex},birthday=#{birthday}
+        where id =#{id}
+    </update>
+    <delete id="deleteById" parameterType="Long">
+        delete from student where id=#{id}
+    </delete>
+</mapper>
